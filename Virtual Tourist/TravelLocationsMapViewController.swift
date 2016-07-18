@@ -19,8 +19,10 @@ class TravelLocationsMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        mapView.delegate = self
         
         loadAllPins()
+        
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         mapView.addGestureRecognizer(gestureRecognizer)
     }
@@ -75,9 +77,7 @@ class TravelLocationsMapViewController: UIViewController {
 extension TravelLocationsMapViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? Pin {
-            let identifier = "\(annotation.latitude)" + "\(annotation.longitude)"
-            
-            print(identifier)
+            let identifier = "\(annotation.latitude!)" + "\(annotation.longitude!)"
             
             var view: MKPinAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
@@ -85,12 +85,15 @@ extension TravelLocationsMapViewController: MKMapViewDelegate {
                 view = dequeuedView
             } else {
                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.canShowCallout = true
-                view.calloutOffset = CGPoint(x: -5, y: 5)
             }
             return view
         }
         return nil
+    }
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        let pin = view.annotation as! Pin
+        print(pin)
     }
 }
 
