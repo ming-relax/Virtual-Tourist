@@ -20,6 +20,7 @@ class TravelLocationsMapViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        loadAllPins()
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         mapView.addGestureRecognizer(gestureRecognizer)
     }
@@ -28,17 +29,68 @@ class TravelLocationsMapViewController: UIViewController {
         if gestureRecognizer.state != UIGestureRecognizerState.Ended {
             return
         }
+    
+        print("handleLongPress")
         
-        let coreDataStack = appDelegate.coreDataStack
-        let managedContext = coreDataStack.managedObjectContext
-
-        let entity = NSEntityDescription.entityForName("Person",inManagedObjectContext:managedContext)!
-        let pin = Pin(entity: entity, insertIntoManagedObjectContext: managedContext)
-        pin.latitude = 10.0
-        pin.longitude = 200.0
-        coreDataStack.saveMainContext()
+        let touchPoint = gestureRecognizer.locationInView(self.mapView)
+        let mapCoordinate = self.mapView.convertPoint(touchPoint, toCoordinateFromView: self.mapView)
+        
+        addPin(mapCoordinate)
         
     }
+    
+    func loadAllPins() {
+        let coreDataStack = appDelegate.coreDataStack
+        let managedContext = coreDataStack.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Pin")
+        
+        do {
+            
+            let pins = try managedContext.executeFetchRequest(fetchRequest)
+            for pin in pins {
+                addPin(pin.coordinate)
+             }
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+    }
+    
+    func addPin(coordinate: CLLocationCoordinate2D) {
+        // Save the pin
+        let coreDataStack = appDelegate.coreDataStack
+        let managedContext = coreDataStack.managedObjectContext
+        
+        let entity = NSEntityDescription.entityForName("Pin",inManagedObjectContext:managedContext)!
+        let pin = Pin(entity: entity, insertIntoManagedObjectContext: managedContext)
+        pin.latitude = coordinate.latitude
+        pin.longitude = coordinate.longitude
+        coreDataStack.saveMainContext()
+        
+        // Draw the pin on the map
+        self.mapView.addAnnotation(pin)
+    }
 
+}
+
+extension TravelLocationsMapViewController: MKMapViewDelegate {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? Pin {
+            let identifier = "\(annotation.latitude)" + "\(annotation.longitude)"
+            
+            print(identifier)
+            
+            var view: MKPinAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
+                dequeuedView.annotation = annotation
+                view = dequeuedView
+            } else {
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                view.canShowCallout = true
+                view.calloutOffset = CGPoint(x: -5, y: 5)
+            }
+            return view
+        }
+        return nil
+    }
 }
 
