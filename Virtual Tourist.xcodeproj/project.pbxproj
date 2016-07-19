@@ -17,6 +17,7 @@
 		3A0590351D328AFD00933C01 /* Virtual_TouristUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0590341D328AFD00933C01 /* Virtual_TouristUITests.swift */; };
 		3A0590441D328E7500933C01 /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0590421D328E7500933C01 /* Pin+CoreDataProperties.swift */; };
 		3A0590451D328E7500933C01 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0590431D328E7500933C01 /* Pin.swift */; };
+		3A2A9AEA1D3E863C0002577D /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A9AE91D3E863C0002577D /* PhotoAlbumViewController.swift */; };
 		3A71A4E01D352F2700E0C1D1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71A4DF1D352F2700E0C1D1 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		3A0590361D328AFD00933C01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A0590421D328E7500933C01 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pin+CoreDataProperties.swift"; path = "Model/Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3A0590431D328E7500933C01 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pin.swift; path = Model/Pin.swift; sourceTree = "<group>"; };
+		3A2A9AE91D3E863C0002577D /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
 		3A71A4DF1D352F2700E0C1D1 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = Model/CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +111,7 @@
 				3A0590111D328AFC00933C01 /* AppDelegate.swift */,
 				3A0590131D328AFC00933C01 /* TravelLocationsMapViewController.swift */,
 				3A0590151D328AFC00933C01 /* Main.storyboard */,
+				3A2A9AE91D3E863C0002577D /* PhotoAlbumViewController.swift */,
 				3A05901B1D328AFC00933C01 /* Assets.xcassets */,
 				3A05901D1D328AFC00933C01 /* LaunchScreen.storyboard */,
 				3A0590201D328AFC00933C01 /* Info.plist */,
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A0590451D328E7500933C01 /* Pin.swift in Sources */,
+				3A2A9AEA1D3E863C0002577D /* PhotoAlbumViewController.swift in Sources */,
 				3A0590141D328AFC00933C01 /* TravelLocationsMapViewController.swift in Sources */,
 				3A0590441D328E7500933C01 /* Pin+CoreDataProperties.swift in Sources */,
 				3A71A4E01D352F2700E0C1D1 /* CoreDataStack.swift in Sources */,

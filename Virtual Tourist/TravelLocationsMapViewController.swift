@@ -21,6 +21,8 @@ class TravelLocationsMapViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         mapView.delegate = self
         
+        print("viewDidLoad")
+        
         loadAllPins()
         
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
@@ -49,6 +51,7 @@ class TravelLocationsMapViewController: UIViewController {
         do {
             
             let pins = try managedContext.executeFetchRequest(fetchRequest)
+                        
             for pin in pins {
                 addPin(pin.coordinate)
              }
@@ -93,7 +96,9 @@ extension TravelLocationsMapViewController: MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         let pin = view.annotation as! Pin
-        print(pin)
+        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("PhotoAlbum") as! PhotoAlbumViewController
+        vc.pin = pin
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
