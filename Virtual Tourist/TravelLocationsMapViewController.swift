@@ -22,7 +22,7 @@ class TravelLocationsMapViewController: UIViewController {
         // add pins to map
         mapView.delegate = self
 
-        loadAllPins()
+        loadAllPinsToMap()
         
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         mapView.addGestureRecognizer(gestureRecognizer)
@@ -46,7 +46,7 @@ class TravelLocationsMapViewController: UIViewController {
         
     }
     
-    func loadAllPins() {
+    func loadAllPinsToMap() {
         let coreDataStack = appDelegate.coreDataStack
         let managedContext = coreDataStack.managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: "Pin")
@@ -57,7 +57,7 @@ class TravelLocationsMapViewController: UIViewController {
             print(pins.count)
             
             for pin in pins {
-                addPin(pin.coordinate)
+                self.mapView.addAnnotation(pin)
              }
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
