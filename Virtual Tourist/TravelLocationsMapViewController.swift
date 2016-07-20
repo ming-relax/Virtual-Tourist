@@ -18,15 +18,18 @@ class TravelLocationsMapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // add pins to map
         mapView.delegate = self
-        
-        print("viewDidLoad")
-        
+
         loadAllPins()
         
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         mapView.addGestureRecognizer(gestureRecognizer)
+        
+        // set back button
+        let backButtonItem = UIBarButtonItem(title: "OK", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButtonItem
     }
     
     func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
@@ -50,8 +53,9 @@ class TravelLocationsMapViewController: UIViewController {
         
         do {
             
-            let pins = try managedContext.executeFetchRequest(fetchRequest)
-                        
+            let pins = try managedContext.executeFetchRequest(fetchRequest) as! [Pin]
+            print(pins.count)
+            
             for pin in pins {
                 addPin(pin.coordinate)
              }

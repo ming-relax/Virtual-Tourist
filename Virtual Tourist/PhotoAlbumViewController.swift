@@ -15,5 +15,7 @@ class PhotoAlbumViewController: UIViewController {
         super.viewDidLoad()
         print("PhotoAlbumViewController did load")
         print(pin)
+
+        self.navigationItem.title = ""
     }
 }
