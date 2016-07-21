@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Virtual Tourist-->
@@ -69,30 +70,90 @@
                         <viewControllerLayoutGuide type="bottom" id="VOe-nH-kbn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="L43-Uk-4i3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cit-sC-Kbn">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="jgP-bt-W40"/>
-                                </items>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="44"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Xyn-1T-9di">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FLM-84-4ho">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gqK-Xx-akA">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1fl-UB-Ivy">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="143" id="2Kc-iC-ejk"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2Kc-iC-ejk"/>
+                                    </mask>
                                 </variation>
-                            </navigationBar>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="2Kc-iC-ejk"/>
+                                    </mask>
+                                </variation>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1fl-UB-Ivy" firstAttribute="leading" secondItem="L43-Uk-4i3" secondAttribute="leadingMargin" constant="-20" id="82k-Vw-elR"/>
+                            <constraint firstItem="VOe-nH-kbn" firstAttribute="top" secondItem="Xyn-1T-9di" secondAttribute="bottom" id="ASc-cA-rxk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1fl-UB-Ivy" secondAttribute="trailing" constant="-20" id="Jfm-zh-WKM"/>
+                            <constraint firstItem="Xyn-1T-9di" firstAttribute="top" secondItem="1fl-UB-Ivy" secondAttribute="bottom" id="eBZ-vH-TtB"/>
+                            <constraint firstItem="1fl-UB-Ivy" firstAttribute="top" secondItem="szP-tQ-2uM" secondAttribute="bottom" id="ez1-HX-ydH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Xyn-1T-9di" secondAttribute="trailing" constant="-20" id="s6e-v4-QNb"/>
+                            <constraint firstItem="Xyn-1T-9di" firstAttribute="leading" secondItem="L43-Uk-4i3" secondAttribute="leadingMargin" constant="-20" id="wSB-f1-3mS"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="Cit-sC-Kbn"/>
+                                <exclude reference="Xyn-1T-9di"/>
+                                <exclude reference="1fl-UB-Ivy"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="82k-Vw-elR"/>
+                                <exclude reference="Jfm-zh-WKM"/>
+                                <exclude reference="ez1-HX-ydH"/>
+                                <exclude reference="eBZ-vH-TtB"/>
+                                <exclude reference="s6e-v4-QNb"/>
+                                <exclude reference="wSB-f1-3mS"/>
+                                <exclude reference="ASc-cA-rxk"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="Cit-sC-Kbn"/>
+                                <include reference="Xyn-1T-9di"/>
+                                <include reference="1fl-UB-Ivy"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="82k-Vw-elR"/>
+                                <include reference="Jfm-zh-WKM"/>
+                                <include reference="ez1-HX-ydH"/>
+                                <include reference="eBZ-vH-TtB"/>
+                                <include reference="s6e-v4-QNb"/>
+                                <include reference="wSB-f1-3mS"/>
+                                <include reference="ASc-cA-rxk"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="1fl-UB-Ivy" id="fGc-LT-sHp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtq-eW-mz5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

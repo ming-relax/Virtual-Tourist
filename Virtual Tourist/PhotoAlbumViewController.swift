@@ -7,15 +7,28 @@
 //
 
 import UIKit
+import MapKit
 
 class PhotoAlbumViewController: UIViewController {
     var pin: Pin?
     
+    @IBOutlet weak var mapView: MKMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("PhotoAlbumViewController did load")
         print(pin)
 
         self.navigationItem.title = ""
+        
+        initMapRegion()
+    }
+    
+    func initMapRegion() {
+        let regionRadius: CLLocationDistance = 1000
+        let region = MKCoordinateRegionMakeWithDistance(pin!.coordinate, regionRadius * 2.0, regionRadius * 2.0)
+        mapView.setRegion(region, animated: true)
+        
+        // add the pin
+        self.mapView.addAnnotation(pin!)
     }
 }
